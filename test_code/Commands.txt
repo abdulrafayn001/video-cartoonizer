@@ -1,0 +1,14 @@
+Extract Audio
+ffmpeg -i inp.mp4 -vn -acodec copy output-audio.aac
+
+Split Video to Frames
+ffmpeg -i out.mp4 -r 30 test_images/out%d.png
+
+Cartoonize Frames (Images)
+python cartoonize.py 
+
+Cartoonized Frames to Video
+ffmpeg -r 30 -i "D:\Documents\FYP\White-box-Cartoonization\test_code\cartoonized_images\out%d.png" -c:v libx264 -pix_fmt yuv420p out.mp4
+
+Merge Audio
+ffmpeg -i out.mp4 -i output-audio.aac -c:v copy -c:a aac out.mp4
